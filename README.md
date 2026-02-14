@@ -41,19 +41,22 @@ Bookmarks are protected using **Row Level Security (RLS)** policies to ensure:
 ```bash
 git clone https://github.com/your-username/smart-bookmark-app.git
 cd smart-bookmark-app
-Install dependencies:
+```
 
+2. Install dependencies:
+
+```
 npm install
 ```
 
-2. Create a .env.local file:
+3. Create a .env.local file:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-3. Run locally:
+4. Run locally:
 
 ```
 npm run dev
