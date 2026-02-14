@@ -5,7 +5,7 @@ Users can log in with Google, save bookmarks, and see updates in real-time acros
 
 ## Live Demo
 
-**Live URL:** https://smart-bookmark-app-ckdemo.vercel.app
+**Live URL:** https://smart-bookmark-app-demo-ck.vercel.app
 
 ## Tech Stack
 
