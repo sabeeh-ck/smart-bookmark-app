@@ -24,7 +24,6 @@ const BookmarkCard = ({
 }: Props) => {
     const getFavicon = (url: string) => {
         const domain = new URL(url).origin;
-        // console.log(`${domain}/favicon.ico`);
         return `${domain}/favicon.ico`;
     };
 
@@ -68,7 +67,14 @@ const BookmarkCard = ({
     return (
         <div className="border-border bg-surface flex flex-col justify-between gap-2 rounded-lg border p-4">
             <div className="flex items-center gap-2">
-                <img src={getFavicon(url)} className="w-8" alt="favicon" />
+                <img
+                    src={getFavicon(url)}
+                    className="w-8"
+                    alt="favicon"
+                    onError={(e) => {
+                        (e.target as HTMLImageElement).src = "/globe.svg";
+                    }}
+                />
                 <div className="flex flex-col">
                     <a
                         href={url}

@@ -6,8 +6,8 @@ import BottomSheet from "@/components/BottomSheet";
 import Header from "@/components/Header";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { supabase } from "@/lib/supabaseClient";
-import { Bookmark } from "@/types";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -15,10 +15,11 @@ export default function Home() {
     const router = useRouter();
 
     const [userId, setUserId] = useState<string | null>(null);
+    const [user, setUser] = useState<User | null>(null);
     const [sheet, setSheet] = useState(false);
     const [authLoading, setAuthLoading] = useState(true);
 
-    const { bookmarks, fetchBookmarks, addBookmark, deleteBookmark, loading } =
+    const { bookmarks, addBookmark, deleteBookmark, loading } =
         useBookmarks(userId);
 
     useEffect(() => {
@@ -32,25 +33,27 @@ export default function Home() {
                 return;
             }
 
+            setUser(user);
             setUserId(user.id);
-            setAuthLoading(false);
 
-            console.log("Logged in user:", user.id);
+            setAuthLoading(false);
         };
 
         checkUser();
     }, [router]);
 
     if (authLoading) {
-        return <p className="mt-20 text-center">Checking session...</p>;
+        return <p className="mt-20 text-center">Loading...</p>;
     }
 
     return (
         <>
-            <Header />
+            <Header user={user} />
             <main className="mx-auto max-w-7xl px-4 py-6">
                 <div className="inset-x-0 flex items-center justify-between">
-                    <h1 className="text-2xl font-medium">My Bookmarks</h1>
+                    <h1 className="text-xl font-medium">
+                        {user?.user_metadata.name.split(" ")[0]}'s Bookmarks
+                    </h1>
                     <button
                         onClick={() => setSheet(true)}
                         className="bg-text text-bg active:bg-text/80 lg:hover:bg-text/80 flex items-center gap-2 rounded-lg px-4 py-2 text-sm"
