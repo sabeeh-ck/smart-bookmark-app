@@ -50,7 +50,12 @@ export const useBookmarks = (userId: string | null) => {
         };
     }, [userId]);
 
-    const addBookmark = async (title: string, url: string, description: string, tags: string) => {
+    const addBookmark = async (
+        title: string,
+        url: string,
+        description: string,
+        tags: string,
+    ) => {
         if (!userId) return;
 
         setError(null);
@@ -78,10 +83,20 @@ export const useBookmarks = (userId: string | null) => {
     const deleteBookmark = async (id: number) => {
         setBookmarks((prev) => prev.filter((b) => b.id !== id));
 
-        const { error } = await supabase.from("bookmarks").delete().eq("id", id);
+        const { error } = await supabase
+            .from("bookmarks")
+            .delete()
+            .eq("id", id);
 
         if (error) fetchBookmarks();
     };
 
-    return { bookmarks, loading, error, fetchBookmarks, addBookmark, deleteBookmark };
+    return {
+        bookmarks,
+        loading,
+        error,
+        fetchBookmarks,
+        addBookmark,
+        deleteBookmark,
+    };
 };
