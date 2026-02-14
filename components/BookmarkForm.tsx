@@ -87,7 +87,6 @@ const BookmarkForm = ({ onAdd, loading, closeSheet }: Props) => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         className="rounded border p-2"
-                        required
                     />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -99,7 +98,6 @@ const BookmarkForm = ({ onAdd, loading, closeSheet }: Props) => {
                         value={tags}
                         onChange={(e) => setTags(e.target.value)}
                         className="rounded border p-2"
-                        required
                     />
                 </div>
                 <button className="bg-text text-bg active:bg-text/80 lg:hover:bg-text/80 mx-auto flex items-center gap-1 rounded-lg px-4 py-2 text-sm">
